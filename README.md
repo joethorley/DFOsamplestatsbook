@@ -1,13 +1,30 @@
-Welcome! 
-
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
-
-This template provides a skeleton file structure that you can edit to create your book. 
-
 The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
 
-Additional resources:
+This booklet was created using the **bookdown** package: https://pkgs.rstudio.com/bookdown
 
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
+<!-- badges: start -->
+![bookdown](https://github.com/poissonconsulting/DFOsamplestatsbook/workflows/bookdown/badge.svg)
+<!-- badges: end -->
 
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+# Introduction 
+
+This booklet provides the course material for the DFO sampling statistics course provided by [Poisson Consulting's](https://www.poissonconsulting.ca). 
+
+It is also available as a website from
+
+https://poisson-DFOsamplestatsbook.netlify.com
+
+password: ##########
+
+## Instructions
+
+### Update
+
+To update the website simply push to GitHub.
+
+### Service
+
+To serve locally:
+```r
+bookdown::serve_book()
+```
