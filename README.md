@@ -14,7 +14,7 @@ It is also available as a website from
 
 https://poisson-DFOsamplestatsbook.netlify.com
 
-password: ##########
+password: salmonids
 
 ## Instructions
 
