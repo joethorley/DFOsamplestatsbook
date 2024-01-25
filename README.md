@@ -8,11 +8,11 @@ This booklet was created using the **bookdown** package: https://pkgs.rstudio.co
 
 # Introduction 
 
-This booklet provides the course material for the DFO sampling statistics course provided by [Poisson Consulting's](https://www.poissonconsulting.ca). 
+This booklet provides the course material for the DFO sampling statistics course provided by [Poisson Consulting](https://www.poissonconsulting.ca). 
 
 It is also available as a website from
 
-https://poisson-DFOsamplestatsbook.netlify.com
+"NETLIFY URL STANDIN"
 
 password: salmonids
 
