@@ -67,3 +67,4 @@ jobs:
         run: |
           npm install netlify-cli -g
           netlify deploy --prod --dir _book
+
