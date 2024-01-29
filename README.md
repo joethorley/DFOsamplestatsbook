@@ -12,6 +12,8 @@ This booklet provides the course material for the DFO sampling statistics course
 
 It is also available as a website from:
 
+https://poisson-dfosamplestatsbook.netlify.app
+
 password: salmonids
 
 ## Instructions
