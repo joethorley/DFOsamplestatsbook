@@ -1,60 +1,49 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Sample Size and Power for Salmon Sampling and Marking"
+author: "Joe Thorley"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
+url: https://poisson-dfosamplestatsbook.netlify.app
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  This booklet was prepared for the Department of Fisheries and Ocean's 
+  Salmonid Enhancement Program in Vancouver for a one day course on
+  sample size and power for salmon sampling and marking.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# Introduction
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+This course was developed at the request of Michael Thom who stated that
 
-## Usage 
+> We have a fairly small team and are looking for a one-day crash course in sample size calculation methods and considerations (power analysis). 
+> We all have a basic understanding of stats and how to program in R, so the team would be able to jump right into this focused topic.
 
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+As requested the course focuses on frequentist methods and power analysis although it begins with a broader introduction to Bayesian methods, effect sizes and power for context.
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+## Materials
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+This booklet is available at
 
-## Render book
+<https://poisson-dfosamplestatsbook.netlify.app>
 
-You can render the HTML version of this example book without changing anything:
+password *salmonids*.
 
-1. Find the **Build** pane in the RStudio IDE, and
+There is an R data package associated with the book which is available at
 
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+<https://github.com/poissonconsulting/DFOsalmonids>
 
-Or build the book from the R console:
+and an R package of simple analytic functions at
 
-```{r, eval=FALSE}
-bookdown::render_book()
-```
+<https://github.com/poissonconsulting/DFOsamplestats>
 
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+Following the course, the book and the R packages could be 
+transferred to the [DFO github](https://github.com/dfo-mpo) site.
 
-## Preview book
+## Utility
 
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+This booklet was written to be a teaching guide for the one day crash course which is being taught as two half days.
+As such the book will be most useful for course participants both during and after the course but was not written to be intelligible to researchers who have not taken the course especially if they little understanding of statistics and/or R.
