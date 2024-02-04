@@ -8,7 +8,7 @@ The **95% confidence interval** is the range of parameter values which if they w
 
 The **p-value** is the probability that if the true parameter value was 0 (no effect) that it would give rise to data with a parameter estimate no more extreme than that observed.
 
-By convention a p-value \< 0.05 is statistically **significant** and this is equivalent to a 95% confidence interval that does not span 0 (no effect).
+By convention a p-value \< 0.05 is statistically **significant** and this is equivalent to a 95% confidence interval that does not span 0 (no effect). 
 
 The **power** is the probability that a p-value will be *significant* for a particular parameter value and sample size.
 
@@ -18,17 +18,18 @@ As is always the case the values are conditional on the assumptions of the model
 
 Bayesian methods multiply the probability of each parameter value giving rise to the observed data by the prior probability of the parameter value being true to get the probability of each parameter values being true given the observed data.
 
-The resultant probability distribution provides a complete summary of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value and a p-value which is the probability of the true effect being in the opposite direction to the estimate. Statistical significance and power are as defined above for frequentist methods.
+The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value and a p-value which is the probability of the true effect being in the opposite direction to the estimate. Statistical significance and power are as defined above for frequentist methods.
 
 ### Relationships between Frequentist and Bayesian Methods
 
-Standard frequentist methods are typically very fast although they are only valid with 'large' sample sizes.
+Standard frequentist methods typically use fast heuristics although their validity depends on the sample size.
 
-Standard Bayesian methods can be slower to fit but do not depend on the sample size can readily handle missing values and allow the uncertainty in derived parameters to be quantified.
+Standard Bayesian methods can be slower to fit but do not depend on the sample size; can readily handle missing values; and allow the uncertainty in derived parameters to be quantified.
 
-Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors (no prior information) [@jaynes_probability_2003; @mcelreath_statistical_2020].
+Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors (no prior information) [@jaynes_probability_2003; @mcelreath_statistical_2020]. 
+If prior information is available then its incorporation leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particularly with small sample sizes.
 
-If prior information is available then its incorporation leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particulary with small sample sizes.
+In this sense frequentist methods can be viewed as a form of Bayesian heuristic [@jaynes_probability_2003].
 
 ## Significance and Effect Sizes
 
@@ -40,12 +41,14 @@ In 2016 the American Statistical Association [@wasserstein_asas_2016] provided a
 
 > Smaller p-values do not necessarily imply the presence of larger or more important effects, and larger p-values do not imply a lack of importance or even lack of effect. Any effect, no matter how tiny, can produce a small p-value if the sample size or measurement precision is high enough, and large effects may produce unimpressive p-values if the sample size is small or measurements are imprecise.
 
+
+
 **Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.**
 
 > Practices that reduce data analysis or scientific inference to mechanical 'bright-line' rules (such as 'p \< 0.05') for justifying scientific claims or conclusions can lead to erroneous beliefs and poor decision making...Pragmatic considerations often require binary, 'yes-no' decisions, but this does not mean that p-values alone can ensure that a decision is correct or incorrect.
 
-Ideally decisions should be based on the estimated consequences (with uncertainty) of alternative actions on human values [@hemming_introduction_2022]. 
-At the very least the effect size (confidence/credible interval) should be reported with the p-value.
+Important decisions should be based on the estimated consequences (with uncertainty) of alternative actions on human values [@hemming_introduction_2022]. 
+However, less consequential decisions such as how many salmonids to tag can be based on simpler heuristics. 
 
 ### Power Analysis
 

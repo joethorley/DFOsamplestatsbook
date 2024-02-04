@@ -1,0 +1,37 @@
+# R
+
+## Installation
+
+R is open source statistical software that can be downloaded from [CRAN](https://cran.r-project.org/).
+
+Once R has been installed the two R packages associated with this course can be installed by running the following code in the R console.
+```{r, eval=FALSE}
+install.packages("remotes")
+remotes::install_github("poissonconsulting/DFOsalmonids")
+remotes::install_github("poissonconsulting/DFOsamplestats")
+```
+
+The packages can then be loaded using
+
+```{r}
+library(DFOsalmonids)
+library(DFOsamplestats)
+```
+
+## Data Package
+
+The `DFOsalmonids` data package provides two data sets both provided by the Department of Fisheries and Oceans.
+
+The first is catch and release data.
+
+```{r}
+library(tidyverse)
+
+DFOsalmonids::salmonids
+```
+
+The second scale age data.
+
+```{r}
+DFOsalmonids::scale_age
+```
