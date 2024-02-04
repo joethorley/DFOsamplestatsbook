@@ -1,4 +1,4 @@
-# R
+# Software
 
 ## Installation
 
@@ -25,7 +25,7 @@ The `DFOsalmonids` data package provides two data sets both provided by the Depa
 The first is catch and release data.
 
 ```{r}
-library(tidyverse)
+library(tibble)
 
 DFOsalmonids::salmonids
 ```
@@ -35,3 +35,5 @@ The second scale age data.
 ```{r}
 DFOsalmonids::scale_age
 ```
+
+## Analytic Package

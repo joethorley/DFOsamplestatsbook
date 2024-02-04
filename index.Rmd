@@ -15,7 +15,7 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Introduction {-}
+# Overview {-}
 
 This course was developed at the request of Michael Thom who stated that
 
