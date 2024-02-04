@@ -15,16 +15,16 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Introduction
+# Introduction {-}
 
 This course was developed at the request of Michael Thom who stated that
 
 > We have a fairly small team and are looking for a one-day crash course in sample size calculation methods and considerations (power analysis). 
 > We all have a basic understanding of stats and how to program in R, so the team would be able to jump right into this focused topic.
 
-As requested the course focuses on frequentist methods and power analysis although it begins with a broader introduction to Bayesian methods, effect sizes and power for context.
+As requested the course focuses on frequentist methods and power analysis although it begins with a broader introduction to Bayesian methods and effect sizes.
 
-## Materials
+## Materials {-}
 
 This booklet is available at
 
@@ -43,7 +43,9 @@ and an R package of simple analytic functions at
 Following the course, the book and the R packages could be 
 transferred to the [DFO github](https://github.com/dfo-mpo) site.
 
-## Utility
+## Users {-}
 
-This booklet was written to be a teaching guide for the one day crash course which is being taught as two half days.
-As such the book will be most useful for course participants both during and after the course but was not written to be intelligible to researchers who have not taken the course especially if they little understanding of statistics and/or R.
+This booklet was written to be a teaching guide for a one day crash course (taught as two half days).
+As such the booklet will be most useful for course participants both during and after the course.
+
+The booklet is not expected to be useful to researchers who have not taken the course especially if they little understanding of statistics and/or R.
