@@ -25,7 +25,12 @@ We can confirm that we have a power of 0.8 using `prop2_power()`.
 ```{r}
 prop2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
 ```
-<!-- in order to work need p-value! -->
+
+```{r}
+#prop2_pvalue(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
+```
+
+
 <!-- prop2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less") -->
 
 ## Scenario 2 (Scale Aging)
@@ -40,20 +45,24 @@ prop2_samplesize(p1 = 0.1, p2 = 0.12, alternative = "less")
 
 This is the total number of scale samples that should be taken (split evenly between the two years)
 
-### Scenario 3 (Age Proportions)
+```{r}
+prop2_power(p1 = 0.1, p2 = 0.12, n = 6051, alternative = "less")
+```
 
-Base information:
-Chinook return at 4 difference age classes
-On average, Chinook are approximately:
-5% (2-yr old), 30% (3-yr), 50% (4-yr), and 15% (5-yr)
-(males and females combined)
+<!-- ### Scenario 3 (Age Proportions) -->
 
-Questions:
-How many scale (age) samples do we need to collect to confidently assert that our sample is representative of the true population age proportions?
+<!-- Base information: -->
+<!-- Chinook return at 4 difference age classes -->
+<!-- On average, Chinook are approximately: -->
+<!-- 5% (2-yr old), 30% (3-yr), 50% (4-yr), and 15% (5-yr) -->
+<!-- (males and females combined) -->
 
-Does the size of the population affect this (i.e. does the sample size different when one population sees an average return of 500 vs 10,000?
+<!-- Questions: -->
+<!-- How many scale (age) samples do we need to collect to confidently assert that our sample is representative of the true population age proportions? -->
 
-Can we pool age results across multiple years? Can we simply take an average? What are the considerations/caveats to this approach
+<!-- Does the size of the population affect this (i.e. does the sample size different when one population sees an average return of 500 vs 10,000? -->
 
-Is the sample size smaller if there are less age classes? How do we factor this into sample size calculation?
+<!-- Can we pool age results across multiple years? Can we simply take an average? What are the considerations/caveats to this approach -->
+
+<!-- Is the sample size smaller if there are less age classes? How do we factor this into sample size calculation? -->
 
