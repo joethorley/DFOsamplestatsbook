@@ -1,3 +1,59 @@
 # Scenarios
 
-## Scenario 1
+Before considering the scenarios it is important to load the `DFOsamplestats` package.
+
+```{r}
+library(DFOsamplestats)
+```
+
+## Scenario 1 (Fish Tagging)
+
+Consider two groups of fish. Group 1 is standard release timing and Group 2 is late release timing.
+Historic data suggests that fish in Group 1 have return rate of 0.5% while fish in Group 2 have a return rate of 0.75%.
+
+> Question: How many samples do we need to release in total to be able to detect this expected difference in survival?
+
+We can answer this question using `DFOsamplestats::prop2_samplesize()` which is a simplifying wrapper on `stats::power.prop.test()`.
+
+```{r}
+prop2_samplesize(p1 = 0.005, p2 = 0.0075, alternative = "less")
+```
+This is the total number of fish that should be tagged (split equally between the two groups).
+
+We can confirm that we have a power of 0.8 using `prop2_power()`.
+
+```{r}
+prop2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
+```
+<!-- in order to work need p-value! -->
+<!-- prop2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less") -->
+
+## Scenario 2 (Scale Aging)
+
+Fish return at age 2, 3, 4, and 5. Age 5 fish comprise about 10% of the returns based on historic scale data we have. 
+
+> Question: How many scales samples do we need to collect in total to be able to detect a 2% difference the age 5 component?
+
+```{r}
+prop2_samplesize(p1 = 0.1, p2 = 0.12, alternative = "less")
+```
+
+This is the total number of scale samples that should be taken (split evenly between the two years)
+
+### Scenario 3 (Age Proportions)
+
+Base information:
+Chinook return at 4 difference age classes
+On average, Chinook are approximately:
+5% (2-yr old), 30% (3-yr), 50% (4-yr), and 15% (5-yr)
+(males and females combined)
+
+Questions:
+How many scale (age) samples do we need to collect to confidently assert that our sample is representative of the true population age proportions?
+
+Does the size of the population affect this (i.e. does the sample size different when one population sees an average return of 500 vs 10,000?
+
+Can we pool age results across multiple years? Can we simply take an average? What are the considerations/caveats to this approach
+
+Is the sample size smaller if there are less age classes? How do we factor this into sample size calculation?
+
