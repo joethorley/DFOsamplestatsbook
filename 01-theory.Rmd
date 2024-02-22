@@ -16,20 +16,34 @@ As is always the case the values are conditional on the assumptions of the model
 
 ## Bayesian Methods
 
-Bayesian methods multiply the probability of each parameter value giving rise to the observed data by the prior probability of the parameter value being true to get the probability of each parameter values being true given the observed data.
+Bayesian methods multiply the probability of each parameter value giving rise to the observed data by the prior probability of the parameter value being true to get the probability of each parameter value being true given the observed data.
 
 The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value and a p-value which is the probability of the true effect being in the opposite direction to the estimate. Statistical significance and power are as defined above for frequentist methods.
 
-@jaynes_probability_2003 mathematically proves that Bayesian methods represent the extension of Boolean logic from certain to uncertain situations.
-Thus while Boolean logic can conclude that because an animal is a shark it must be a fish Bayesian analysis can estimate the probability that an animal is a shark given that it may be a fish!
+@jaynes_probability_2003 mathematically proves that Bayesian methods represent the extension of formal logic from certain to uncertain situations.
 
-## Frequentist < Bayesian
+Thus while formal logic can proceeds as follows
 
-Standard frequentist methods typically use fast heuristics although their validity depends on the sample size.
+> All sharks are fish.
+
+Therefore
+
+- If an object is a shark it is as fish.
+- If an object is not a fish it is not a shark.
+
+Bayesian inference can take a statement like
+
+- If an object is probably a shark what is the probability it is fish.
+- If an object is a fish what is the probability it is shark.
+
+## Frequentist vs Bayesian
+
+Standard frequentist methods typically use fast heuristics but their validity depends on the sample size.
 
 Standard Bayesian methods can be slower to fit but do not depend on the sample size; can readily handle missing values; and allow the uncertainty in derived parameters to be quantified.
 
-Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors (no prior information) [@jaynes_probability_2003; @mcelreath_statistical_2020]. If prior information is available then its incorporation leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particularly with small sample sizes.
+Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors [@jaynes_probability_2003; @mcelreath_statistical_2020]. 
+If prior information is available then its incorporation leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particularly with small sample sizes.
 
 In this sense frequentist methods can be viewed as a form of Bayesian heuristic [@jaynes_probability_2003].
 
@@ -44,7 +58,7 @@ It included the following
 Any effect, no matter how tiny, can produce a small p-value if the sample size or measurement precision is high enough, and large effects may produce unimpressive p-values if the sample size is small or measurements are imprecise.
 
 In other words, p-values confound the estimated size of the effect with the uncertainty (width of the confidence interval) which is what they were intended to do [@greenland2019]. 
-The solution is to also report the estimate and associated confidence/credible intervals an approach sometimes referred to as effect size estimation/reporting.
+The solution is to also report the estimate and associated confidence/credible intervals; an approach sometimes referred to as effect size estimation/reporting.
 
 **Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.**
 
@@ -63,11 +77,11 @@ It is worth noting that once a sample has been collected a post-hoc power analys
 
 To understand the inter-dependence among effect size and power consider that a power analysis can be used to determine how the uncertainty in an estimate (width of the CI) will vary with the sample size.
 
-In the case of simple models equations have been developed to allow the power to be quickly calculated.
-More complex models require thousands of data sets to be simulated and analysed which can be time consuming.
+In the case of very simple models, equations have been developed to allow the power to be quickly calculated.
+More complex models require thousands of data sets to be simulated and analysed which depending on the complexity of the model can require a lot of computational time.
 
 ## Summary
 
-In short the use of frequentist power analyses to determine the number of salmon to tag and recapture can be viewed and justified as a quick and dirty Bayesian Decision Analytic heuristic.
+In short the use of frequentist power analyses to determine the number of salmon to tag and recapture can be viewed and justified as a quick Bayesian Decision Analytic heuristic.
 
-However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to provide a satisfactory answer.
+However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to make an informed decision.
