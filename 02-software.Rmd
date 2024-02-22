@@ -6,9 +6,9 @@ R is open source statistical software that can be downloaded from [CRAN](https:/
 
 Once R has been installed the two R packages associated with this course can be installed by running the following code in the R console.
 ```{r, eval=FALSE}
-install.packages("remotes")
-remotes::install_github("poissonconsulting/DFOsalmonids")
-remotes::install_github("poissonconsulting/DFOsamplestats")
+install.packages("pak")
+pak::pak("poissonconsulting/DFOsalmonids")
+pak::pak("poissonconsulting/DFOsamplestats")
 ```
 
 The packages can then be loaded using
@@ -37,3 +37,5 @@ DFOsalmonids::scale_age
 ```
 
 ## Analytic Package
+
+The `DFOsamplestats` R package provides wrapper functions to perform simple frequentist p-value estimation and power analyses.
