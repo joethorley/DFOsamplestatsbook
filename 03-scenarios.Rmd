@@ -26,11 +26,6 @@ We can confirm that we have a power of 0.8 using `prop2_power()`.
 prop2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
 ```
 
-```{r}
-#prop2_pvalue(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
-```
-
-
 <!-- prop2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less") -->
 
 ## Scenario 2 (Scale Aging)
