@@ -10,6 +10,8 @@ The **p-value** is the probability that if the true parameter value was 0 (no ef
 
 By convention a p-value \< 0.05 is statistically **significant** and this is equivalent to a 95% confidence interval that does not span 0 (no effect).
 
+If we are willing to assume that we know the direction of change then the p-value is halved.
+
 The **power** is the probability that a p-value will be *significant* for a particular parameter value and sample size.
 
 As is always the case the values are conditional on the assumptions of the model being correct.
@@ -73,15 +75,15 @@ However, less consequential data collections decisions such as how many salmonid
 
 Power analysis can be used to determine how much data to collect to have a reasonable probability (typically 0.8) of a statistically significant result (typically p-value \< 0.05) for a given effect size.
 
-It is worth noting that once a sample has been collected a post-hoc power analysis provides no information beyond that already provided by the estimated effect size [@colegrave_confidence_2003].
+It is worth noting that once a sample has been collected a post-hoc power analysis provides no information beyond that already provided by the estimated effect size with uncertainty [@colegrave_confidence_2003].
 
-To understand the inter-dependence among effect size and power consider that a power analysis can be used to determine how the uncertainty in an estimate (width of the CI) will vary with the sample size.
+To understand the inter-dependence among effect size and power consider that a p-value of < 0.05 corresponds to a effect size with a 95% confidence interval that doesn't span 0.
 
-In the case of very simple models, equations have been developed to allow the power to be quickly calculated.
-More complex models require thousands of data sets to be simulated and analysed which depending on the complexity of the model can require a lot of computational time.
+In the case of very simple models, heuristic equations have been developed to allow the power to be quickly calculated.
+More complex models require hundreds of data sets to be simulated and analysed which depending on the complexity of the model can require a lot of computational time.
 
 ## Summary
 
-In short the use of frequentist power analyses to determine the number of salmon to tag and recapture can be viewed and justified as a quick Bayesian Decision Analytic heuristic.
+In short the use of frequentist power analyses to determine the number of salmon to tag and scale can be viewed and justified as a quick Bayesian Decision Analytic heuristic.
 
-However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to make an informed decision.
+However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to make an informed decision. For more information see McElreath [@mcelreath_statistical_2020].
