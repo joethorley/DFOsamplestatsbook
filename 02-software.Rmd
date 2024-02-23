@@ -38,6 +38,43 @@ DFOsalmonids::scale_age
 
 ## Analytic Package
 
-The `DFOsamplestats` R package provides wrapper functions to perform simple frequentist p-value estimation and power analyses.
+[`DFOsamplestats`](https://poissonconsulting.github.io/DFOsamplestats/index.html) provides functions to calculate the power (at a significance level of 0.05) using [`rate2_power()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power.html) and sample size to achieve a power of 0.8 for the difference in the rate between two groups using [`rate2_samplesize()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_samplesize.html).
 
-More specifically it provides ... [`rate2_power()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power.html).
+```{r}
+library(DFOsamplestats)
+rate2_power(p1 = 0.005, p2 = 0.0075, n = 31197)
+rate2_samplesize(p1 = 0.005, p2 = 0.0075)
+```
+
+`DFOsamplestats` also provides the [`rate_effect()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_effect.html) to estimate the effect size and p-values  based on the number of individuals returning in each group given the number tagged.
+
+```{r}
+rate_effect(r = c(156,  234), n = 31197)
+```
+
+And the [`rate_sim()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_sim.html) simulate data.
+
+```{r}
+set.seed(99)
+rate_sim(p = c(0.005, 0.0075), n = 31197)
+rate_sim(p = c(0.005, 0.0075), n = 31197)
+```
+
+Finally `DFOsamplestats` provides the [`rate2_power_analysis()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power_analysis.html) function to perform a full power analysis.
+
+```{r}
+set.seed(100)
+rate2_power_analysis(p1 = 0.005, p2 = 0.0075, n = 31197)
+```
+
+It is worth noting that [`rate2_power()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power.html), which is a wrapper on `stats::power.prop.test()`,
+uses a heuristic to calculate the power.
+As a result it is quicker but less reliable at small sample sizes than [`rate2_power_analysis()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power_analysis.html) which performs a full power analysis (although calculation of the p-values still assumes that the likelihood profile is normally distributed).
+
+To understand why `rate2_power()` is unreliable at small sample sizes consider the fact that it is not possible to get a significant result with just 5 samples yet it estimates the power to be 0.39 with 5 samples and a rate of 0.1!
+
+```{r}
+rate_effect(0, 5)
+rate2_power(0.1, 5)
+rate2_power_analysis(0.1, 5)
+```
