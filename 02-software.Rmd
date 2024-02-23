@@ -39,3 +39,5 @@ DFOsalmonids::scale_age
 ## Analytic Package
 
 The `DFOsamplestats` R package provides wrapper functions to perform simple frequentist p-value estimation and power analyses.
+
+More specifically it provides ... [`rate2_power()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power.html).
