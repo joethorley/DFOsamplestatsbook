@@ -13,20 +13,27 @@ Historic data suggests that fish in Group 1 have return rate of 0.5% while fish 
 
 > Question: How many samples do we need to release in total to be able to detect this expected difference in survival?
 
-We can answer this question using `DFOsamplestats::prop2_samplesize()` which is a simplifying wrapper on `stats::power.prop.test()`.
+We can answer this question using `DFOsamplestats::rate2_samplesize()`.
 
 ```{r}
-prop2_samplesize(p1 = 0.005, p2 = 0.0075, alternative = "less")
+rate2_samplesize(p1 = 0.005, p2 = 0.0075, alternative = "greater")
 ```
 This is the total number of fish that should be tagged (split equally between the two groups).
 
-We can confirm that we have a power of 0.8 using `prop2_power()`.
+We can confirm that we have a power of 0.8 using `rate2_power()`.
 
 ```{r}
-prop2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less")
+rate2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
 ```
 
-<!-- prop2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "less") -->
+It is worth noting that the slower but more reliable `rate2_power_analysis()` gives a very similar answer.
+
+```{r}
+set.seed(99)
+rate2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
+```
+
+The `rate2_power_analysis()` which performs a full power analysis by simulating data can also be used to estimate the power to detect a difference for one group relative to 0.5
 
 ## Scenario 2 (Scale Aging)
 
@@ -35,25 +42,51 @@ Fish return at age 2, 3, 4, and 5. Age 5 fish comprise about 10% of the returns 
 > Question: How many scales samples do we need to collect in total to be able to detect a 2% difference the age 5 component?
 
 ```{r}
-prop2_samplesize(p1 = 0.1, p2 = 0.12, alternative = "less")
+rate2_samplesize(p1 = 0.1, p2 = 0.12)
 ```
 
-This is the total number of scale samples that should be taken (split evenly between the two years)
+This is the total number of scale samples that should be taken (split evenly between the two years) if we are unwilling to assume the direction of change.
 
 ```{r}
-prop2_power(p1 = 0.1, p2 = 0.12, n = 6051, alternative = "less")
+rate2_power(p1 = 0.1, p2 = 0.12, n = 7682)
 ```
 
-<!-- ### Scenario 3 (Age Proportions) -->
+If we were willing to assume that any change was positive then we would have greater power.
 
-<!-- Base information: -->
-<!-- Chinook return at 4 difference age classes -->
-<!-- On average, Chinook are approximately: -->
-<!-- 5% (2-yr old), 30% (3-yr), 50% (4-yr), and 15% (5-yr) -->
-<!-- (males and females combined) -->
+```{r}
+rate2_power(p1 = 0.1, p2 = 0.12, n = 7682, alternative = "greater")
+```
 
-<!-- Questions: -->
-<!-- How many scale (age) samples do we need to collect to confidently assert that our sample is representative of the true population age proportions? -->
+### Scenario 3 (Age Proportions)
+
+Fish return at age 2 (5%), 3 (30%), 4 (50%), and 5 (15%).
+
+A useful way to understand the uncertainty at different sample sizes is to simulate a data set and estimate the values.
+
+```{r}
+set.seed(42)
+sim <- rate_sim(p = c(0.05, 0.3, 0.5, 0.15), n = 1000)
+effect <- rate_effect(r = sim$r, n = sim$n)
+```
+It is worth noting that the first p-value is the null hypothesis that p1 = 0.5 while the subsequent p-values are for the null hypothesis that pn = p1.
+
+The estimated rates and associated 95% CIs can be plotted using the `ggplot2` package.
+
+```{r}
+library(ggplot2)
+library(scales)
+
+ggplot(data = effect) +
+  aes(x = group, y = estimate) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  expand_limits(y = 0) +
+  scale_x_discrete("Group", labels = paste0("Age-", 2:5)) +
+  scale_y_continuous("Percent (%)", labels = percent)
+```
+
+
+
+<!-- > Questions: How many scale (age) samples do we need to collect to confidently assert that our sample is representative of the true population age proportions? -->
 
 <!-- Does the size of the population affect this (i.e. does the sample size different when one population sees an average return of 500 vs 10,000? -->
 
