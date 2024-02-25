@@ -2,41 +2,91 @@
 
 ## Frequentist Methods
 
-In frequentist methods, the **estimate** is the parameter value which if it was true would be most likely to give rise to the observed data [@millar_maximum_2011].
+In frequentist methods, the **estimate** is the value of the parameter ($\theta$) which if it was true would be most likely to give rise to the observed data [@millar_maximum_2011].
+In other words, frequentist methods aim to select the value of $\theta$ which maximizes the likelihood
 
-The **95% confidence interval** is the range of parameter values which if they were true would have a 5% or greater probability of giving rise to data with a parameter estimate no more extreme than that observed.
+$$P(D|\theta X)$$
+
+where $P(D|\theta X)$ is the probability of the observed data ($D$) given the parameter value ($\theta$) and background information ($X$).
+
+The **95% confidence interval** is the range of values of $\theta$ which if they were true would have a 5% or greater probability of giving rise to data with a parameter estimate no more extreme than that observed.
 
 The **p-value** is the probability that if the true parameter value was 0 (no effect) that it would give rise to data with a parameter estimate no more extreme than that observed.
 
 By convention a p-value \< 0.05 is statistically **significant** and this is equivalent to a 95% confidence interval that does not span 0 (no effect).
 
+
+```{r sig, echo = FALSE, fig.height = 3, fig.width = 6, fig.cap = "Example 95% confidence intervals."}
+library(ggplot2)
+large <- data.frame(y = 0, ymin = -0.2, ymax = 0.2) 
+small <- data.frame(y = 0, ymin = -0.05, ymax = 0.05)
+
+data <- rbind(large, small, large - 0.06, small - 0.06, 
+                  large - 0.225, small - 0.225)
+
+data$y[1] <- -0.15
+data$ymin[1] <- -0.5
+data$ymax[1] <- 0.2
+
+data$Significance <- factor("Not Significant", levels = c("Not Significant", "Significant"))
+data$Significance[data$ymax < 0] <- "Significant"
+
+data$x <- 1:nrow(data)
+
+gp_significance <- ggplot(data = data, aes(x = x, y = y)) +
+  geom_pointrange(aes(ymin = ymin, ymax = ymax, color = Significance)) +
+  geom_hline(yintercept = 0, linetype = "dotted") +
+  scale_y_continuous("Effect (%)", labels = percent) + 
+  scale_color_manual(values = c("black", "blue")) + 
+  scale_x_continuous(breaks = 1:6) +
+  ylab("Estimate") +
+  theme(axis.title.y = element_blank()) +
+  NULL
+
+gp_significance
+```
+
+
+
 If we are willing to assume that we know the direction of change then the p-value is halved.
 
 The **power** is the probability that a p-value will be *significant* for a particular parameter value and sample size.
 
-As is always the case the values are conditional on the assumptions of the model being correct.
+As is always the case the values are conditional on background information $X$.
 
 ## Bayesian Methods
 
-Bayesian methods multiply the probability of each parameter value giving rise to the observed data by the prior probability of the parameter value being true to get the probability of each parameter value being true given the observed data.
+Bayesian methods take the probability of each parameter value giving rise to the observed data if it was true and multiply it by the probability of it being true (given the background information) to get the probability of each parameter value being true given the observed data.
 
-The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value and a p-value which is the probability of the true effect being in the opposite direction to the estimate. Statistical significance and power are as defined above for frequentist methods.
+$$P(\theta|DX)  \propto P(D|\theta X) \cdot P(\theta|X)$$
 
-@jaynes_probability_2003 mathematically proves that Bayesian methods represent the extension of formal logic from certain to uncertain situations.
+The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value (conditional on the background information) and a p-value which is the probability of the true effect being in the opposite direction to the median. 
 
-Thus while formal logic can proceeds as follows
+Statistical significance and power are as defined above for frequentist methods.
+
+### The Logic of Science
+
+Bayesian methods represent the extension of formal logic from certain to uncertain situations @jaynes_probability_2003.
+
+For example formal logic can take the premise
 
 > All sharks are fish.
 
-Therefore
+and a second premise
 
-- If an object is a shark it is as fish.
-- If an object is not a fish it is not a shark.
+> x is not a fish.
 
-Bayesian inference can take a statement like
+and conclude with certainty that 'x is not a shark'.
 
-- If an object is probably a shark what is the probability it is fish.
-- If an object is a fish what is the probability it is shark.
+Bayesian inference on the other hand can take a premise such as
+
+> Most sharks are fish.
+
+and a second premise
+
+> x is probably not a fish
+
+and estimate with uncertainty the probability that x is not a shark.
 
 ## Frequentist vs Bayesian
 
