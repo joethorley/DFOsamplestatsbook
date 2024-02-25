@@ -2,6 +2,10 @@
 
 ## Age Proportions
 
+The following code estimates the proportion of each age class by brood year with 95% CIs.
+
+The warning and confidence intervals that include 0 for zero counts are because the code uses the Wald heuristic.
+
 ```{r, fig.width = 6, fig.height=8, fig.cap="Estimated percent composition by age and brood year."}
 library(dplyr)
 data <- DFOsalmonids::scale_age
@@ -27,4 +31,4 @@ gp <- data %>%
 print(gp)
 ```
 
-Will use some of the DFO data to explore some real case studies.
+Based on visual examination of the plots it is clear that there are substantial differences among years.
