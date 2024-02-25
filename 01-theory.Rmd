@@ -74,6 +74,8 @@ Any effect, no matter how tiny, can produce a small p-value if the sample size o
 
 ```{r sig, echo = FALSE, fig.height = 3, fig.width = 6, fig.cap = "Example 95% confidence intervals."}
 library(ggplot2)
+library(scales)
+
 large <- data.frame(y = 0, ymin = -0.2, ymax = 0.2) 
 small <- data.frame(y = 0, ymin = -0.05, ymax = 0.05)
 
