@@ -15,6 +15,62 @@ The **p-value** is the probability that if the true parameter value was 0 (no ef
 
 By convention a p-value \< 0.05 is statistically **significant** and this is equivalent to a 95% confidence interval that does not span 0 (no effect).
 
+If we are willing to assume that we know the direction of change then the p-value is halved.
+
+As is always the case the values are conditional on background information $X$.
+
+## Bayesian Methods
+
+Bayesian methods take the probability of each parameter value giving rise to the observed data if it was true and multiply it by the probability of it being true (given the background information) to get the probability of each parameter value being true given the observed data.
+
+$$P(\theta|DX)  \propto P(D|\theta X) \cdot P(\theta|X)$$
+
+The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value (conditional on the background information) and a p-value which is the probability of the true effect being in the opposite direction to the median. 
+
+### The Logic of Science
+
+Bayesian methods represent the extension of formal logic from certain to uncertain situations @jaynes_probability_2003.
+
+For example formal logic can take the premise
+
+> All sharks are fish.
+
+and a second premise
+
+> x is not a fish.
+
+and conclude with certainty that x is not a shark.
+
+Bayesian inference on the other hand can take a premise such as
+
+> Most sharks are fish.
+
+and a second premise
+
+> x is probably not a fish
+
+and estimate with uncertainty the probability that x is not a shark.
+
+## Heuristics
+
+Heuristics are quicker but less reliable methods to arrive at an answer.
+
+Standard frequentist methods typically use fast heuristics but their validity depends on the sample size.
+Standard Bayesian methods can be slower to fit but do not depend on the sample size; can readily handle missing values; and allow the uncertainty in derived parameters to be quantified.
+
+Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors [@jaynes_probability_2003; @mcelreath_statistical_2020]. 
+However, if background information is incorporated via the priors then it leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particularly with small sample sizes.
+
+## P-values
+
+In 2016 the American Statistical Association [@wasserstein_asas_2016] provided a statement on p-values. 
+It included the following
+
+**A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.**
+
+> Smaller p-values do not necessarily imply the presence of larger or more important effects, and larger p-values do not imply a lack of importance or even lack of effect. 
+Any effect, no matter how tiny, can produce a small p-value if the sample size or measurement precision is high enough, and large effects may produce unimpressive p-values if the sample size is small or measurements are imprecise.
+
 
 ```{r sig, echo = FALSE, fig.height = 3, fig.width = 6, fig.cap = "Example 95% confidence intervals."}
 library(ggplot2)
@@ -46,71 +102,8 @@ gp_significance <- ggplot(data = data, aes(x = x, y = y)) +
 gp_significance
 ```
 
-
-
-If we are willing to assume that we know the direction of change then the p-value is halved.
-
-The **power** is the probability that a p-value will be *significant* for a particular parameter value and sample size.
-
-As is always the case the values are conditional on background information $X$.
-
-## Bayesian Methods
-
-Bayesian methods take the probability of each parameter value giving rise to the observed data if it was true and multiply it by the probability of it being true (given the background information) to get the probability of each parameter value being true given the observed data.
-
-$$P(\theta|DX)  \propto P(D|\theta X) \cdot P(\theta|X)$$
-
-The resultant probability distribution provides a complete representation of the uncertainty although it can be summarized in terms of an estimate (often median), a 95% credible interval (typically 95% quantiles) which has a 95% probability of including the true value (conditional on the background information) and a p-value which is the probability of the true effect being in the opposite direction to the median. 
-
-Statistical significance and power are as defined above for frequentist methods.
-
-### The Logic of Science
-
-Bayesian methods represent the extension of formal logic from certain to uncertain situations @jaynes_probability_2003.
-
-For example formal logic can take the premise
-
-> All sharks are fish.
-
-and a second premise
-
-> x is not a fish.
-
-and conclude with certainty that 'x is not a shark'.
-
-Bayesian inference on the other hand can take a premise such as
-
-> Most sharks are fish.
-
-and a second premise
-
-> x is probably not a fish
-
-and estimate with uncertainty the probability that x is not a shark.
-
-## Frequentist vs Bayesian
-
-Standard frequentist methods typically use fast heuristics but their validity depends on the sample size.
-
-Standard Bayesian methods can be slower to fit but do not depend on the sample size; can readily handle missing values; and allow the uncertainty in derived parameters to be quantified.
-
-Frequentist analyses can, and generally are, interpreted as Bayesian analyses with uninformative priors [@jaynes_probability_2003; @mcelreath_statistical_2020]. 
-If prior information is available then its incorporation leads to more reliable estimates [@jaynes_probability_2003; @mcelreath_statistical_2020], particularly with small sample sizes.
-
-In this sense frequentist methods can be viewed as a form of Bayesian heuristic [@jaynes_probability_2003].
-
-## P-values
-
-In 2016 the American Statistical Association [@wasserstein_asas_2016] provided a statement on p-values. 
-It included the following
-
-**A p-value, or statistical significance, does not measure the size of an effect or the importance of a result.**
-
-> Smaller p-values do not necessarily imply the presence of larger or more important effects, and larger p-values do not imply a lack of importance or even lack of effect. 
-Any effect, no matter how tiny, can produce a small p-value if the sample size or measurement precision is high enough, and large effects may produce unimpressive p-values if the sample size is small or measurements are imprecise.
-
 In other words, p-values confound the estimated size of the effect with the uncertainty (width of the confidence interval) which is what they were intended to do [@greenland2019]. 
-The solution is to also report the estimate and associated confidence/credible intervals; an approach sometimes referred to as effect size estimation/reporting.
+The solution is to report the estimate and associated confidence/credible intervals; an approach sometimes referred to as effect size estimation/reporting.
 
 **Scientific conclusions and business or policy decisions should not be based only on whether a p-value passes a specific threshold.**
 
@@ -126,7 +119,6 @@ However, less consequential data collections decisions such as how many salmonid
 Power analysis can be used to determine how much data to collect to have a reasonable probability (typically 0.8) of a statistically significant result (typically p-value \< 0.05) for a given effect size.
 
 It is worth noting that once a sample has been collected a post-hoc power analysis provides no information beyond that already provided by the estimated effect size with uncertainty [@colegrave_confidence_2003].
-
 To understand the inter-dependence among effect size and power consider that a p-value of < 0.05 corresponds to a effect size with a 95% confidence interval that doesn't span 0.
 
 In the case of very simple models, heuristic equations have been developed to allow the power to be quickly calculated.
@@ -136,4 +128,5 @@ More complex models require hundreds of data sets to be simulated and analysed w
 
 In short the use of frequentist power analyses to determine the number of salmon to tag and scale can be viewed and justified as a quick Bayesian Decision Analytic heuristic.
 
-However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to make an informed decision. For more information see McElreath [@mcelreath_statistical_2020].
+However, it is important to have a general understanding of the theoretical background so that if frequentist power analysis proves inadequate for a particular problem it is clear how to alter it to make an informed decision. 
+For more information see McElreath [@mcelreath_statistical_2020].

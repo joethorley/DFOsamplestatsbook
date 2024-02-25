@@ -52,6 +52,8 @@ rate2_samplesize(p1 = 0.005, p2 = 0.0075)
 rate_effect(r = c(156,  234), n = 31197)
 ```
 
+The p-value for the first group is for $p_1 = 0.5$ while the p-value for subsequent groups is for $p_n = p_1$.
+
 And the [`rate_sim()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_sim.html) simulate data.
 
 ```{r}

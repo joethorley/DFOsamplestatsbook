@@ -11,35 +11,39 @@ library(DFOsamplestats)
 Consider two groups of fish. Group 1 is standard release timing and Group 2 is late release timing.
 Historic data suggests that fish in Group 1 have return rate of 0.5% while fish in Group 2 have a return rate of 0.75%.
 
-> Question: How many samples do we need to release in total to be able to detect this expected difference in survival?
+> Question: How many fish do we need to tag in total to be able to detect this expected difference in survival?
 
-We can answer this question using `DFOsamplestats::rate2_samplesize()`.
+We can answer this question using `rate2_samplesize()`.
+
+```{r}
+rate2_samplesize(p1 = 0.005, p2 = 0.0075)
+```
+This is the total number of fish that should be tagged (split equally between the two groups).
+
+If we are willing to assume that any difference is positive then the sample size would be smaller.
 
 ```{r}
 rate2_samplesize(p1 = 0.005, p2 = 0.0075, alternative = "greater")
 ```
-This is the total number of fish that should be tagged (split equally between the two groups).
 
 We can confirm that we have a power of 0.8 using `rate2_power()`.
 
 ```{r}
 rate2_power(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
 ```
-
-It is worth noting that the slower but more reliable `rate2_power_analysis()` gives a very similar answer.
+As the data set is relatively big the slower but more reliable `rate2_power_analysis()` gives a very similar answer.
 
 ```{r}
 set.seed(99)
 rate2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
 ```
 
-The `rate2_power_analysis()` which performs a full power analysis by simulating data can also be used to estimate the power to detect a difference for one group relative to 0.5
-
 ## Scenario 2 (Scale Aging)
 
-Fish return at age 2, 3, 4, and 5. Age 5 fish comprise about 10% of the returns based on historic scale data we have. 
+Fish return at age 2, 3, 4, and 5. 
+Age 5 fish comprise about 10% of the returns based on historic scale data we have. 
 
-> Question: How many scales samples do we need to collect in total to be able to detect a 2% difference the age 5 component?
+> Question: How many scales samples do we need to collect in total to be able to detect a 2% difference in the age 5 component?
 
 ```{r}
 rate2_samplesize(p1 = 0.1, p2 = 0.12)
@@ -57,7 +61,7 @@ If we were willing to assume that any change was positive then we would have gre
 rate2_power(p1 = 0.1, p2 = 0.12, n = 7682, alternative = "greater")
 ```
   
-### Scenario 3 (Age Proportions)
+## Scenario 3 (Age Proportions)
 
 Fish return at age 2 (5%), 3 (30%), 4 (50%), and 5 (15%).
 
@@ -68,7 +72,7 @@ set.seed(42)
 sim <- rate_sim(p = c(0.05, 0.3, 0.5, 0.15), n = 1000)
 effect <- rate_effect(r = sim$r, n = sim$n)
 ```
-It is worth noting that the first p-value is the null hypothesis that p1 = 0.5 while the subsequent p-values are for the null hypothesis that pn = p1.
+It is worth noting that the first p-value is the null hypothesis that $p_1 = 0.5$ while the subsequent p-values are for the null hypothesis that $p_n = p_1$.
 
 The estimated rates and associated 95% CIs can be plotted using the `ggplot2` package.
 
