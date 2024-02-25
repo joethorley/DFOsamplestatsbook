@@ -6,7 +6,7 @@ Before considering the scenarios it is important to load the `DFOsamplestats` pa
 library(DFOsamplestats)
 ```
 
-## Scenario 1 (Fish Tagging)
+## Fish Tagging
 
 Consider two groups of fish. Group 1 is standard release timing and Group 2 is late release timing.
 Historic data suggests that fish in Group 1 have return rate of 0.5% while fish in Group 2 have a return rate of 0.75%.
@@ -38,7 +38,7 @@ set.seed(99)
 rate2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
 ```
 
-## Scenario 2 (Scale Aging)
+## Scale Aging
 
 Fish return at age 2, 3, 4, and 5. 
 Age 5 fish comprise about 10% of the returns based on historic scale data we have. 
@@ -61,7 +61,7 @@ If we were willing to assume that any change was positive then we would have gre
 rate2_power(p1 = 0.1, p2 = 0.12, n = 7682, alternative = "greater")
 ```
   
-## Scenario 3 (Age Proportions)
+## Age Proportions
 
 Fish return at age 2 (5%), 3 (30%), 4 (50%), and 5 (15%).
 

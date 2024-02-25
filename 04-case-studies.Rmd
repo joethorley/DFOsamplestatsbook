@@ -1,3 +1,30 @@
 # Case Studies
 
+## Age Proportions
+
+```{r, fig.width = 6, fig.height=8, fig.cap="Estimated percent composition by age and brood year."}
+library(dplyr)
+data <- DFOsalmonids::scale_age
+
+data %<>%
+  group_by(brood_year) %>%
+  mutate(total_captures = sum(captures)) %>%
+  ungroup()
+
+effect <- rate_effect(data$captures, data$total_captures)
+
+data <- bind_cols(data, effect)
+
+gp <- data %>%
+  ggplot() +
+  aes(x = age, y = estimate) +
+  facet_wrap(~brood_year) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  scale_x_continuous("Age") +
+  scale_y_continuous("Proportion (%)", labels = percent) +
+  NULL
+
+print(gp)
+```
+
 Will use some of the DFO data to explore some real case studies.
