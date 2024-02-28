@@ -6,7 +6,7 @@ Before considering the scenarios it is important to load the `DFOsamplestats` pa
 library(DFOsamplestats)
 ```
 
-## Fish Tagging
+## Fish Tagging Two Groups
 
 Consider two groups of fish. Group 1 is standard release timing and Group 2 is late release timing.
 Historic data suggests that fish in Group 1 have return rate of 0.5% while fish in Group 2 have a return rate of 0.75%.
@@ -38,7 +38,55 @@ set.seed(99)
 rate2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater")
 ```
 
-## Scale Aging
+## Fish Tagging Multiple Groups
+
+Consider the following data set
+
+```{r, echo=FALSE}
+data <- tibble::tribble(
+  ~year, ~tagged, ~catch, ~escapement,
+2017, 10000, 1291,	152,
+2018, 10000,	1465,	210,
+2019, 10000, 898,	165,
+2020, 10000,	1876,	256)
+print(data)
+
+```
+
+> Question: Are the rates significantly different across years / which years? How do I create confidence intervals?
+
+This can be done using `rate_effect()`. 
+It is worth noting that the first p-value is the null hypothesis that $p_1 = 0.5$ while the subsequent p-values are for the null hypothesis that $p_n = p_1$.
+
+```{r}
+effect <- rate_effect(r = data$escapement, n = data$tagged)
+effect$year <- data$year
+print(effect)
+```
+
+And the results plotted using `ggplot2`.
+
+```{r}
+library(ggplot2)
+library(scales)
+
+ggplot(data = effect) +
+  aes(x = year, y = estimate) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  expand_limits(y = 0) +
+  scale_x_continuous("Year") +
+  scale_y_continuous("Percent (%)", labels = percent)
+```
+
+> Question: If not significant, how do I figure out how many more tags I should have applied / fisheries recoveries should I have made?
+
+```{r}
+p1 <- effect$estimate[1]
+p2 <- effect$estimate[3]
+rate2_samplesize(p1, p2)
+```
+
+## Age Proportions Two Groups
 
 Fish return at age 2, 3, 4, and 5. 
 Age 5 fish comprise about 10% of the returns based on historic scale data we have. 
@@ -61,7 +109,7 @@ If we were willing to assume that any change was positive then we would have gre
 rate2_power(p1 = 0.1, p2 = 0.12, n = 7682, alternative = "greater")
 ```
   
-## Age Proportions
+## Age Proportions Multiple Groups
 
 Fish return at age 2 (5%), 3 (30%), 4 (50%), and 5 (15%).
 
@@ -72,14 +120,10 @@ set.seed(42)
 sim <- rate_sim(p = c(0.05, 0.3, 0.5, 0.15), n = 1000)
 effect <- rate_effect(r = sim$r, n = sim$n)
 ```
-It is worth noting that the first p-value is the null hypothesis that $p_1 = 0.5$ while the subsequent p-values are for the null hypothesis that $p_n = p_1$.
 
 The estimated rates and associated 95% CIs can be plotted using the `ggplot2` package.
 
 ```{r}
-library(ggplot2)
-library(scales)
-
 ggplot(data = effect) +
   aes(x = group, y = estimate) +
   geom_pointrange(aes(ymin = lower, ymax = upper)) +
@@ -97,4 +141,3 @@ ggplot(data = effect) +
 <!-- Can we pool age results across multiple years? Can we simply take an average? What are the considerations/caveats to this approach -->
 
 <!-- Is the sample size smaller if there are less age classes? How do we factor this into sample size calculation? -->
-

@@ -120,9 +120,6 @@ However, less consequential data collections decisions such as how many salmonid
 
 Power analysis can be used to determine how much data to collect to have a reasonable probability (typically 0.8) of a statistically significant result (typically p-value \< 0.05) for a given effect size.
 
-It is worth noting that once a sample has been collected a post-hoc power analysis provides no information beyond that already provided by the estimated effect size with uncertainty [@colegrave_confidence_2003].
-To understand the inter-dependence among effect size and power consider that a p-value of < 0.05 corresponds to a effect size with a 95% confidence interval that doesn't span 0.
-
 In the case of very simple models, heuristic equations have been developed to allow the power to be quickly calculated.
 More complex models require hundreds of data sets to be simulated and analysed which depending on the complexity of the model can require a lot of computational time.
 
