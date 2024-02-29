@@ -42,7 +42,7 @@ rate2_power_analysis(p1 = 0.005, n = 24574, p2 = 0.0075, alternative = "greater"
 
 Consider the following data set
 
-```{r, echo=FALSE}
+```{r}
 data <- tibble::tribble(
   ~year, ~tagged, ~catch, ~escapement,
 2017, 10000, 1291,	152,
@@ -50,7 +50,6 @@ data <- tibble::tribble(
 2019, 10000, 898,	165,
 2020, 10000,	1876,	256)
 print(data)
-
 ```
 
 > Question: Are the rates significantly different across years / which years? How do I create confidence intervals?
