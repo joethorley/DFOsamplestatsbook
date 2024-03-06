@@ -72,3 +72,10 @@ gp <- ggplot(data = data) +
 
 gp
 ```
+
+## Geocentric Models
+
+@mcelreath_statistical_2020 describes linear models and general linear models as geocentric in the model in that they can predict observational data but typically provide poor predictions of the consequences of management actions.
+
+<iframe width="700" height="394"
+src="https://www.youtube.com/embed/tNOu-SEacNU?si=RxSiy0Hm_lAmf1pX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
