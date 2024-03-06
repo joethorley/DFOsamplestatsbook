@@ -8,7 +8,8 @@ Imports:
   ggplot2,
   scales,
   stats,
-  tibble
+  tibble,
+  tidyr
 Remotes: 
   poissonconsulting/DFOsalmonids,
   poissonconsulting/DFOsamplestats

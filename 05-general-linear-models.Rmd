@@ -12,7 +12,7 @@ $$ X_i \sim N(\mu_i, \sigma) $$
 
 which is to say that the expected value ($\mu_i$) for the ith observation ($X_i$) is the result of 1) summing particular parameter values for particular groups and/or multiplying parameter values by predictor variables to produce 2) expected values that can be positive or negative where 3) the data are normally distributed about the expected values.
 
-### General Linear Models
+## General Linear Models
 
 General linear models extend linear models through the use of a link function to ensure the expected values are positive or bounded between 0 and 1 (typically log or log odds, respectively) and/or the use of distributions other than the normal such as the Bernoulli for binary outcomes, the Poisson for counts, the binomial for number of successful trials, the log-normal for positive continuous values etc.
 
@@ -21,3 +21,54 @@ For example consider the following model to estimate the expected count of fish 
 $$\log(\mu_i) = \alpha_X[X_i] + \beta_Y \cdot Y_i +...$$
 
 $$ X_i \sim \text{Poisson}(\mu_i) $$
+
+## Transformations
+
+There are two transformations that are important to understand when interpreting statistical analyses.
+
+### Logarithmic Transformation
+
+Taking the [logarithm](#logarithms) of a number between $0$ and $\infty$ rescales it between $-\infty$ and $\infty$.
+In statistical modeling this relationship is used to ensure unbounded parameters provide positive estimates for response variables such as length or density.
+
+```{r, fig.width = 6, fig.height = 4, echo = FALSE, fig.cap = "Logarithmic functions by common bases."}
+library(dplyr)
+library(tidyr)
+
+data <- tibble(x = seq(0.1, 10, by = 0.001)) %>%
+  mutate(`2` = log(x, base = 2),
+         `2.718` = log(x),
+         `10` = log(x, base = 10)) %>%
+  pivot_longer(-x, names_to = "base") %>%
+  mutate(base = factor(base, levels = c("2", "2.718", "10")))
+  
+gp <- ggplot(data = data) +
+  aes(x = value, y = x, group = base, color = base) +
+  geom_line() +
+  scale_y_continuous(breaks = 0:10) +
+  scale_x_continuous("log(x)", breaks = -4:4)
+
+gp
+```
+
+### Logistic Transformation
+
+The logistic transformation is the logarithm of the odds
+
+$$\text{logit(x)} = \log\big(\frac{x}{1-x}\big)$$
+
+Taking the log-odds of a number between $0$ and $1$ rescales it between $-\infty$ and $\infty$. 
+This relationship is used to ensure unbounded parameters provide estimates between 0 and 1 for response variables such as probability of detection.
+
+```{r, fig.width = 6, fig.height = 4, echo = FALSE, fig.cap = "Logistic transformation."}
+data <- tibble(x = seq(0.01, 0.99, by = 0.01)) %>%
+  mutate(y = log(x / (1 - x)))
+  
+gp <- ggplot(data = data) +
+  aes(x = y, y = x) +
+  geom_line() +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1)) +
+  scale_x_continuous("logit(x)", breaks = -4:4)
+
+gp
+```
