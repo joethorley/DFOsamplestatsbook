@@ -1,0 +1,59 @@
+# Hierarchical Models
+
+Hierarchical models are so named because the are composed of models within models.
+
+## Fixed Group Effects (No Pooling)
+
+In a simple fixed effects model like an ANOVA the expected value for each group is estimated independently of the value for the other groups in the sense that knowing something about the value for one group tells you nothing about the value(s) for the other group.
+
+This might be represented mathematically as follows
+
+$$ L_{i,j} \sim N(\alpha_i, \sigma) $$
+where $L_{i,j}$ is the length of the ith fish in the jth group, $\sim N()$ is the normal distribution, $\alpha_i$ is the average (expected) length for the jth group and $sigma$ is the standard deviation of the fish within group variation.
+
+## Random Group Effects (Partial Pooling)
+
+Random effects allow the distribution of parameter values as opposed to just the distribution of data to be estimated.
+In this way knowing something about the value for one group in an ANOVA would tell you something about the value(s) for the other groups and vice versa.
+
+Expanding our ANOVA to include a random effect of group would produce the following hierarchical (mixed-effects) model
+
+$$ \alpha_i \sim N(\alpha', \sigma') $$
+
+
+$$ L_{i,j} \sim N(\alpha_i, \sigma) $$
+
+where $\alpha'$ is the expected length for a typical group and $\sigma'$ is the standard deviation of the among group variation.
+
+## No Group Effects (No Pooling)
+
+A third alternative is the no group effects model 
+
+$$ L_{i,j} \sim N(\alpha, \sigma) $$
+
+$\alpha$ is the expected length for all fish pooled together.
+
+In a sense a random effects models represent a balance (partial pooling) between the equivalent fixed effect model (no pooling) and no effect model (complete pooling).
+
+## When to Use Random Effects
+
+Random effects can be used when there are at least three groups (ideally five or more) and it makes sense to think about a distribution of groups.
+The inclusion of random effects particularly multiple nested random effects can slow model converge.
+
+## Reasons for using Random Effects
+
+### Accounting for Pseudoreplication
+
+Random effects account for pseudoreplication.
+
+### Improved Estimates
+
+Random effects improve predictions. 
+
+### Scope
+
+Random effects allow us to make inferences about groups outside the study.
+
+### Variability
+
+Random effects allow us to estimate the among group variation.
