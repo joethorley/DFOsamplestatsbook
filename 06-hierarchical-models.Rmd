@@ -44,7 +44,7 @@ The inclusion of random effects particularly multiple nested random effects can 
 
 ### Accounting for Pseudoreplication
 
-Random effects account for pseudoreplication.
+Random effects can account for pseudoreplication including overdispersion.
 
 ### Improved Estimates
 

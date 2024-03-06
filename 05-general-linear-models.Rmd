@@ -1,0 +1,23 @@
+# General Linear Models
+
+General linear models represent the extension of linear models such as t-tests, ANOVAs and ANCOVAs beyond the assumption of normally distributed data.
+
+## Linear Models
+
+Linear models are of the form
+
+$$\mu_i = \alpha_X[X_i] + \beta_Y \cdot Y_i +...$$
+and 
+$$ X_i \sim N(\mu_i, \sigma) $$
+
+which is to say that the expected value ($\mu_i$) for the ith observation ($X_i$) is the result of 1) summing particular parameter values for particular groups and/or multiplying parameter values by predictor variables to produce 2) expected values that can be positive or negative where 3) the data are normally distributed about the expected values.
+
+### General Linear Models
+
+General linear models extend linear models through the use of a link function to ensure the expected values are positive or bounded between 0 and 1 (typically log or log odds, respectively) and/or the use of distributions other than the normal such as the Bernoulli for binary outcomes, the Poisson for counts, the binomial for number of successful trials, the log-normal for positive continuous values etc.
+
+For example consider the following model to estimate the expected count of fish in a pool.
+
+$$\log(\mu_i) = \alpha_X[X_i] + \beta_Y \cdot Y_i +...$$
+
+$$ X_i \sim \text{Poisson}(\mu_i) $$
