@@ -8,8 +8,9 @@ In a simple fixed effects (no pooling) model like an ANOVA the expected value fo
 
 This might be represented mathematically as follows
 
-$$ L_{i,j} \sim N(\alpha_i, \sigma) $$
-where $L_{i,j}$ is the length of the ith fish in the jth group, $\sim N()$ is the normal distribution, $\alpha_i$ is the average (expected) length for the jth group and $sigma$ is the standard deviation of the fish within group variation.
+$$ L_{i,j} \sim N(\alpha_j, \sigma') $$
+
+where $L_{i,j}$ is the length of the ith fish in the jth group, $\sim N()$ is the normal distribution, $\alpha_i$ is the average (expected) length for the jth group and $\sigma'$ is the standard deviation of the fish within group variation.
 
 ## Random Effects
 
@@ -18,22 +19,21 @@ In this way knowing something about the value for one group in an ANOVA would te
 
 Expanding our ANOVA to include a random effect of group would produce the following hierarchical (mixed-effects) model
 
-$$ \alpha_i \sim N(\alpha', \sigma') $$
+$$ \alpha_j \sim N(\bar\alpha, \sigma) $$
 
+$$ L_{i,j} \sim N(\alpha_j, \sigma) $$
 
-$$ L_{i,j} \sim N(\alpha_i, \sigma) $$
-
-where $\alpha'$ is the expected length for a typical group and $\sigma'$ is the standard deviation of the among group variation.
+where $\bar\alpha$ is the expected length for a typical group and $\sigma$ is the standard deviation of the among group variation.
 
 ## No Effects
 
 A third alternative is the no group effects (no pooling) model 
 
-$$ L_{i,j} \sim N(\alpha, \sigma) $$
+$$ L_{i,j} \sim N(\alpha, \sigma') $$
 
 $\alpha$ is the expected length for all fish pooled together.
 
-In a sense a random effects models represent a balance (partial pooling) between the equivalent fixed effect model (no pooling) and no effect model (complete pooling) depending on the value of $\sigma'$.
+In a sense a random effects models represent a balance (partial pooling) between the equivalent fixed effect model (no pooling) and no effect model (complete pooling) depending on the value of $\sigma$.
 
 ## Why Random Effects
 
@@ -54,6 +54,8 @@ Random effects allow us to estimate the among group variation.
 ### Better Predictions
 
 Random effects improve predictions by tuning the value of $\alpha'$
+
+## Frogs in Tanks
 
 <iframe width="700" height="394"
 src="https://www.youtube.com/embed/iwVqiiXYeC4?si=dq3Z9Qjx86wci9KK&amp;start=1314" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
