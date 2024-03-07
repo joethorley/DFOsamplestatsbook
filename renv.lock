@@ -12,23 +12,35 @@
     "DFOsalmonids": {
       "Package": "DFOsalmonids",
       "Version": "0.0.0.9000",
-      "Source": "unknown",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "DFOsalmonids",
+      "RemoteUsername": "poissonconsulting",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "e7bdd86c7cb77756b9c680d6f45b3145d224cb02",
       "Requirements": [
         "R"
       ],
-      "Hash": "616031d3eba7e78111591e2999d3f123"
+      "Hash": "6a3187e8b07886025aa7c8e33fa9a418"
     },
     "DFOsamplestats": {
       "Package": "DFOsamplestats",
       "Version": "0.0.0.9000",
-      "Source": "unknown",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "DFOsamplestats",
+      "RemoteUsername": "poissonconsulting",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "442daeeb9d0f69d034d552b753d65b8705274e0b",
       "Requirements": [
         "R",
         "chk",
         "stats",
         "tibble"
       ],
-      "Hash": "6b2b10aeb366da9646ce8afd9adebd69"
+      "Hash": "a3fb03a00229adaf2f283b31a3bfd14e"
     },
     "MASS": {
       "Package": "MASS",
