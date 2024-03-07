@@ -205,7 +205,7 @@ At the extremes if no decision would be altered I wouldn't sample any fish and i
 
 If I was blind to the potential costs and benefits I would probably settle for a sample size of 1,000 based on an argument of diminishing returns.
 
-If I would concerned about the validity of the heuristic I would then validate this result based on a Bayesian power analysis with `nsims = 1000`.
+If I was concerned about the validity of the heuristic I would then validate this result based on a Bayesian power analysis with `nsims = 1000`.
 
 ```{r}
 set.seed(42)
