@@ -1,17 +1,21 @@
 # Prior Information
 
-Bayesian analysis allows the incorporation of prior information which represents a form of regularization in the sense that biologically implausible results are not considered reasonable without adequate support in the data.
+Bayesian analysis allows the incorporation of prior information.
+Incorporating existing knowledge represents a form of regularization in the sense that biologically implausible results are not considered reasonable without adequate support in the data.
+
+## Five Males
 
 Consider a case where a biologist captures five returning salmon at random from run of 10,000 individuals and discovers that they are all males.
 
-## Frequentist with Exact Estimate
+### Frequentist with Exact Estimate
 
-Under a strict interpretation of the frequentist framework they should tell their manager that the sex ratio is skewed towards males (the p-value for the null hypothesis of a 50:50 sex ratio is $0.5^5 = 0.031$) and that their best estimate is that all 10,000 individuals are males!
-They could also publish a paper discussing their statistically significant result.
+Under a strict interpretation of the frequentist framework they should tell their manager that the sex ratio is skewed towards males (the p-value for the null hypothesis of an equal sex ratio is $0.5^5 = 0.031$) and that their best estimate is that all 10,000 individuals are males!
 
-## Frequentist with Approximate Estimate
+They could also publish a paper in a high impact journal that only publishes surprising results discussing their statistically significant finding.
 
-If they were use a heuristic to calculate an approximate estimate they would report that the best estimate is that all the fish are males although they wouldn't be able to publish a paper as they wouldn't be able to rule out the possibility that all the fish are females!
+### Frequentist with Approximate Estimate
+
+If they were use a heuristic to calculate an approximate estimate they would still report that the best estimate is that all the fish are males although they wouldn't be able to rule out the possibility that all the fish are females!
 
 ```{r}
 library(DFOsamplestats)
@@ -20,37 +24,59 @@ rate_effect(0, 5)
 
 ### Bayesian with Uninformative Prior
 
-If they were fit the equivalent Bayesian model then even with an uninformative prior (beta distribution with an alpha of 1 and a beta of 1) they would still conclude that the sex ratio was significantly different from 50:50 but their estimate (if using the median value of the posterior probability) would be that approximately 10% of the run was female.
+If they were fit the equivalent Bayesian model with an uninformative prior they would still conclude that the sex ratio was significantly different from 50:50 but their estimate (if using the median value of the posterior probability) would be that approximately 11% of the run was female.
 
 ```{r}
-plot_dbeta()
 set.seed(42)
 rate_effect_bayesian(0, 5)
 ```
 
 ### Bayesian with Weakly Informative Prior
 
-If they were to fit the Bayesian model with a weakly informative prior say a beta distribution with alpha = 11 and beta = 11 then they would estimate that about 40% of the run was female although they would consider in reasonably likely that females make up 60% of the run.
+If they were to fit the Bayesian model with a weakly informative prior say a beta distribution with alpha = 11 and beta = 11
 
 ```{r}
 plot_dbeta(11, 11)
+```
+
+then they would estimate that about 40% of the run was female although they would consider it reasonably likely that females make up 60% of the run.
+
+```{r}
 set.seed(42)
 rate_effect_bayesian(0, 5, alpha = 11, beta = 11)
 ```
 
 ### Bayesian with Informative Prior
 
-With an informative prior then they would conclude that knowing the sex of five fish barely changes the uncertainty around the sex ratio which based on natural selection and previous experience is likely very close to 50:50.
+With an informative prior
+
+```{r}
+plot_dbeta(101, 101)
+```
+
+then they would conclude that knowing the sex of five fish barely changes the the likely sex ratio.
 
 ```{r}
 set.seed(42)
 rate_effect_bayesian(0, 5, alpha = 101, beta = 101)
 ```
 
-Indeed given this much prior information then they would require a sample size of ~30 males to produce a pvalue < 0.05.
+Indeed given this much prior information then they would require 68 or more males from a sample size of 100 fish to be surprised if sex ratio wasn't skewed.
 
 ```{r}
 set.seed(42)
-rate_effect_bayesian(0, 30, alpha = 101, beta = 101)
+rate_effect_bayesian(32, 100, alpha = 101, beta = 101)
+```
+This is exactly the same result as if we had no prior knowledge about sex ratio and sampled 132 males out of 300 fish.
+```{r}
+set.seed(42)
+rate_effect_bayesian(132, 300, alpha = 1, beta = 1)
 ```
 
+### Suprisal
+
+Surprisal (in the Bayesian framework) is how surprising (in terms of tossing x heads in a row on a fair coin) it would be to discover the that true effect is in the opposite direction to the estimated effect.
+
+```{r}
+-log(0.042, base = 2)
+```
