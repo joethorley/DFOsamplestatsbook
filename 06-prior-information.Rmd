@@ -9,7 +9,7 @@ Consider a case where a biologist captures five returning salmon at random from 
 
 ### Frequentist with Exact Estimate
 
-Under a strict interpretation of the frequentist framework they should tell their manager that the sex ratio is skewed towards males (the p-value for the null hypothesis of an equal sex ratio is $0.5^5 = 0.031$) and that their best estimate is that all 10,000 individuals are males!
+Under a strict interpretation of the frequentist framework they should tell their manager that the sex ratio is skewed towards males (the p-value for the null hypothesis of an equal sex ratio is `dbinom(0, 5, 0.5)` = 0.031 and that their best estimate is that all 10,000 individuals are males!
 
 They could also publish a paper in a high impact journal that only publishes surprising results discussing their statistically significant finding.
 
@@ -61,28 +61,33 @@ set.seed(42)
 rate_effect_bayesian(0, 5, alpha = 101, beta = 101)
 ```
 
-Indeed given this much prior information then they would require 68 or more males from a sample size of 100 fish to be surprised if sex ratio wasn't skewed.
+Indeed given this much prior information then they would require 68 or more males from a sample size of 100 fish to obtain a statistically significant result.
 
 ```{r}
 set.seed(42)
 rate_effect_bayesian(32, 100, alpha = 101, beta = 101)
 ```
-This is exactly the same result as if we had no prior knowledge about sex ratio and sampled 132 males out of 300 fish.
+
+## Bayesian Updating
+
+It is worth noting that this is exactly the same result as if we had had no prior knowledge about the likely value of the sex ratio (i.e. population biology did not exist as a discipline) and sampled 132 males out of 300 fish.
 ```{r}
 set.seed(42)
 rate_effect_bayesian(132, 300, alpha = 1, beta = 1)
 ```
 
-And the same as if our prior knowledge about the sex ratio had the same information content as sampling 132 males out of 300 fish and we had yet to collect any data.
+It is also the same result as if our prior knowledge about the sex ratio had the same information content as sampling 132 males out of 300 fish and we had yet to collect any data.
 ```{r}
 set.seed(42)
 rate_effect_bayesian(NA_real_, 0, alpha = 133, beta = 169)
 ```
 
-### Suprisal
+## Suprisal
 
 Surprisal (in the Bayesian framework) is how surprising (in terms of tossing x heads in a row on a fair coin) it would be to discover the that true effect is in the opposite direction to the estimated effect [@rafi_semantic_2020].
 
 ```{r}
--log(0.042, base = 2)
+p2svalue(c(1, 0.5, 0.25, 0.05, 0.01, 0.001, 0.0001))
+dbinom(0, 5, 0.5)
+p2svalue(dbinom(0, 5, 0.5))
 ```

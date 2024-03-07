@@ -14,17 +14,21 @@ which is to say that the expected value ($\mu_i$) for the ith observation ($X_i$
 
 ## General Linear Models
 
-General linear models extend linear models through the use of a link function to ensure the expected values are positive or bounded between 0 and 1 (typically log or log odds, respectively) and/or the use of distributions other than the normal such as the Bernoulli for binary outcomes, the Poisson for counts, the binomial for number of successful trials, the log-normal for positive continuous values etc.
+General linear models extend linear models through the use of a tranformation (link function) to ensure the expected values are positive or bounded between 0 and 1 (typically log or log odds, respectively) and/or the use of distributions other than the normal such as the Bernoulli for binary outcomes, the Poisson for counts, the binomial for number of successful trials, the log-normal for positive continuous values etc.
 
-For example consider the following model to estimate the expected count of fish in a pool.
+For example consider the following model to estimate the expected count of salmon.
 
 $$\log(\mu_i) = \alpha_X[X_i] + \beta_Y \cdot Y_i +...$$
 
 $$ X_i \sim \text{Poisson}(\mu_i) $$
 
+It uses the log transform to ensure the expected value is 0 and the Poisson to handle the counts which are natural as opposed to real numbers.
+
+For more information on distributions see chapter 8.
+
 ## Transformations
 
-There are two transformations that are important to understand when interpreting statistical analyses.
+There are two transformations that are important to understand when performing and interpreting statistical analyses.
 
 ### Logarithmic Transformation
 

@@ -102,6 +102,9 @@ rate_effect_bayesian(0, 5)
 rate2_power(0.1, 5)
 rate2_power_analysis(0.1, 5)
 rate2_power_analysis_bayesian(0.1, 5, nsims = 100)
+# p-value
+dbinom(x = 0, size = 5, prob = 0.5)
+# power
 dbinom(x = 0, size = 5, prob = 0.1)
 ```
-The exact power analysis simply uses the density function for the binomial distribution to get the proportion of outcomes that will be 0!
+The exact power analysis simply uses the density function for the binomial distribution to get the proportion of outcomes that will be 0 of the rate is 0!
