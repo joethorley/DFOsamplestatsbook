@@ -17,9 +17,30 @@ data %<>%
 
 effect <- rate_effect(data$captures, data$total_captures)
 
-data <- bind_cols(data, effect)
+effect <- bind_cols(data, effect)
 
-gp <- data %>%
+gp <- effect %>%
+  ggplot() +
+  aes(x = age, y = estimate) +
+  facet_wrap(~brood_year) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  scale_x_continuous("Age") +
+  scale_y_continuous("Proportion (%)", labels = percent) +
+  NULL
+
+print(gp)
+```
+
+A Bayesian model correctly handles the 0 counts.
+
+```{r, fig.width = 6, fig.height=8, fig.cap="Estimated percent composition by age and brood year."}
+library(dplyr)
+
+effect <- rate_effect_bayesian(data$captures, data$total_captures)
+
+effect <- bind_cols(data, effect)
+
+gp <- effect %>%
   ggplot() +
   aes(x = age, y = estimate) +
   facet_wrap(~brood_year) +
@@ -32,6 +53,8 @@ print(gp)
 ```
 
 Based on visual examination of the plots it is clear that there are substantial differences among years.
+
+Rather than fitting a multinomial a more informative approach would be to estimate marine survival and percent return strategies.
 
 ## Smolt vs Seapen Survival Rate
 
@@ -62,17 +85,27 @@ data <- tribble(
 2018,	185782,	26733,	"Smolt 0+",	0.005236973)
 ```
 
+Consider the following data set.
+
 ```{r,message=FALSE}
-library(magrittr)
-data %<>% 
-  mutate(Returns = round(Tags * Survival_Rate))
-data
+data <- mutate(data, Returns = round(Tags * Survival_Rate))
+print(data)
+```
 
-effect <- rate_effect_bayesian(r = data$Returns, n = data$Tags)
+And the following prior for the return rate.
+```{r}
+plot_dbeta(alpha = 1, beta = 11)
+```
 
-data <- bind_cols(data, effect)
+A Bayesian model estimates that survival for smolt 0+ is highly variable among years. It also indicates that there are meaningful differences among TagCodes.
 
-gp <- data %>%
+```{r}
+effect <- rate_effect_bayesian(r = data$Returns, n = data$Tags,
+                               alpha = 1, beta = 11)
+
+effect <- bind_cols(data, effect)
+
+gp <- effect %>%
   ggplot() +
   aes(x = Brood_Year, y = estimate) +
   geom_pointrange(aes(ymin = lower, ymax = upper, color = Release_Stage, shape = Release_Stage), position = position_dodge(width = 0.25)) +
@@ -83,13 +116,22 @@ gp <- data %>%
 print(gp)
 ```
 
-## Chelis Tubs
+In this situation I would consider a model with a random effect of year within release stage with different annual variability for each stage.
+I would also consider including a random effect of tag code. 
+This model is still geocentric in that it doesn't allow us to predict the effect of a management action.
+
+## Chehalis Tubs
 
 Three populations in separate tubs (T1, T2, T3) swam through plumbing and may have mixed between tubs.  
 It is unknown the direction that the fish moved and we only know that tub T2 has more fish than it did previously and T3 has less.  
 We want to find out if any of the tubs are single stock and the rough proportion of stocks in mixed tubs?
 
-I would simply plot how the uncertainty in the proportion of a population that is one stock varies with the sample size
+Assumptions 
+  - Movement between tubs has stopped 
+	- Fish are randomly selected from tubs for sampling
+	- Fish are not sampled twice 
+
+Based on this very limited information I would plot how the uncertainty in the proportion of a population that is one stock varies with the sample size with uninformative priors.
 
 ```{r}
 estimate <- rate_effect_bayesian(r = 0:100, n = 0:100)
@@ -109,7 +151,7 @@ gp <- estimate %>%
 print(gp)
 ```
 
-To make the relationship clearer I would plot it on the log odds scale.
+To make the relationship clearer I would plot it on the log odds (logistic) scale.
 
 ```{r}
 gp <- estimate %>%
@@ -119,8 +161,53 @@ gp <- estimate %>%
   geom_line(aes(y = lower), linetype = "dotted") +
   geom_line(aes(y = upper), linetype = "dotted") +
   scale_x_continuous("Sample Size") +
-  scale_y_continuous("Proportion (%)", transform = "logit", labels = percent, breaks = c(0.01, 0.1,0.5,0.9, 0.99, 0.999, 0.9999)) +
+  scale_y_continuous("Proportion (%)", transform = "logit", labels = percent, breaks = c(0.01, 0.1,0.5,0.9, 0.95, 0.99, 0.999, 0.9999)) +
   NULL
 
 print(gp)
+```
+
+For the question of single stocks I may settle on 75 fish from each tank because if one individual was a different stock it would indicate it was a mixed stock but if all were the same stock then it would allow us to estimate that there is a 95% that the stock is more than 95% pure.
+
+For the other question I might simply plot how the required sample size to detect a significant difference from 0.5 with a power of 0.8 varies by difference.
+
+```{r}
+data <- tibble::tibble(p = seq(0, 0.49, by = 0.01))
+data$n <- purrr::map_int(data$p, ~rate2_samplesize(.x))
+
+gp <- data %>%
+  ggplot() +
+  aes(x = p, y = n) +
+  geom_line() +
+  scale_x_continuous("Proportion (%)", labels = percent) +
+  scale_y_continuous("Sample Size", labels = comma) +
+  NULL
+
+print(gp)
+```
+I would likely use the log transform to better understand how the sample size requirement varies.
+
+```{r}
+gp <- data %>%
+  ggplot() +
+  aes(x = p, y = n) +
+  geom_line() +
+  scale_x_continuous("Proportion (%)", labels = percent) +
+  scale_y_log10("Sample Size", labels = comma) +
+  NULL
+
+print(gp)
+```
+
+I would then ask what current or future management decisions might be altered by reducing the uncertainty in the proportional of each tub and what the likely benefits of an improved decision might be and I would ask what the cost of sample fish is.
+
+At the extremes if no decision would be altered I wouldn't sample any fish and if no cost to sampling I would sample all the fish!
+
+If I was blind to the potential costs and benefits I would probably settle for a sample size of 1,000 based on an argument of diminishing returns.
+
+If I would concerned about the validity of the heuristic I would then validate this result based on a Bayesian power analysis with `nsims = 1000`.
+
+```{r}
+set.seed(42)
+rate2_power_analysis_bayesian(p1 = 0.45, n = 1000, nsims = 100)
 ```
