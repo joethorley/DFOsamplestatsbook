@@ -38,6 +38,8 @@ DFOsalmonids::scale_age
 
 ## Analytic Package
 
+### Power
+
 [`DFOsamplestats`](https://poissonconsulting.github.io/DFOsamplestats/index.html) provides functions to calculate the power (at a significance level of 0.05) using [`rate2_power()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power.html) and sample size to achieve a power of 0.8 for the difference in the rate between two groups using [`rate2_samplesize()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_samplesize.html).
 
 ```{r}
@@ -46,6 +48,8 @@ rate2_power(p1 = 0.005, p2 = 0.0075, n = 31197)
 rate2_samplesize(p1 = 0.005, p2 = 0.0075)
 ```
 
+### Effect Size
+
 `DFOsamplestats` also provides the [`rate_effect()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_effect.html) to estimate the effect size and p-values  based on the number of individuals returning in each group given the number tagged.
 
 ```{r}
@@ -53,6 +57,8 @@ rate_effect(r = c(156,  234), n = 31197)
 ```
 
 The p-value for the first group is for $p_1 = 0.5$ while the p-value for subsequent groups is for $p_n = p_1$.
+
+### Power
 
 And the [`rate_sim()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_sim.html) simulate data.
 
