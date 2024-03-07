@@ -71,9 +71,9 @@ rate2_power_analysis(p1 = 0.005, p2 = 0.0075, n = 31197)
 
 ### Bayesian
 
-Finally `DFOsamplestats` also provide [`rate_effect_bayesian()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_effect_bayesian.html) and [`rate2_power_analysis_bayesian()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power_analysis_bayesian.html) to estimate effect sizes and power incorporating prior information.
+Finally `DFOsamplestats` provides [`rate_effect_bayesian()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_effect_bayesian.html) and [`rate2_power_analysis_bayesian()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate2_power_analysis_bayesian.html) to estimate effect sizes and a perform a full power analysis incorporating prior information.
 
-```{r}
+```{r, message=FALSE}
 set.seed(100)
 rate_effect_bayesian(r = 1, n = 10, alpha = 5, beta = 5)
 rate2_power_analysis(p1 = 0.005, p2 = 0.0075, n = 31197, nsims = 100)
@@ -85,7 +85,8 @@ It is worth noting that `rate2_power()`, which is a wrapper on `stats::power.pro
 uses a heuristic to calculate the power.
 As a result it is quicker but less reliable at small sample sizes than `rate2_power_analysis()` which performs a full power analysis.
 However, `rate2_power_analysis()` still assumes that the likelihood profile is normally distributed which is typically not the case with little data at very low or high rates.
-For the most reliable estimate use `rate2_power_analysis_bayesian()` with `nsims = 1000`.
+For the most reliable estimate use `rate2_power_analysis_bayesian()` with `nsims = 1000` or greater.
+Finally in the current example an exact calculation of the power is performed.
 
 ```{r}
 set.seed(100)
@@ -95,4 +96,6 @@ rate_effect_bayesian(0, 5)
 rate2_power(0.1, 5)
 rate2_power_analysis(0.1, 5)
 rate2_power_analysis_bayesian(0.1, 5, nsims = 100)
+dbinom(x = 0, size = 5, prob = 0.1)
 ```
+The exact power analysis simply uses the density function for the binomial distribution to get the proportion of outcomes that will be 0!
