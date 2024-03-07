@@ -32,3 +32,53 @@ print(gp)
 ```
 
 Based on visual examination of the plots it is clear that there are substantial differences among years.
+
+## Survival Rate
+
+```{r, echo = FALSE}
+data <- tribble(
+~Brood_Year, ~Tagcode, ~Tags,	~Release_Stage,	~Survival_Rate,
+2013,	183670,	59988,	"Smolt 0+",	0.002038574,
+2013,	183671,	59802,	"Seapen 0+",	0.007729173,
+2014,	182694,	27712,	"Smolt 0+",	0.010796767,
+2014,	182695,	31584,	"Seapen 0+",	0.013691109,
+2014,	182696,	29104,	"Smolt 0+",	0.006679838,
+2014,	182697,	25677,	"Seapen 0+",	0.018492425,
+2015,	182866,	27205,	"Seapen 0+",	0.007199779,
+2015,	182867,	25245,	"Seapen 0+",	0.009332541,
+2015,	182868,	23202,	"Smolt 0+",	0.009084562,
+2015,	182869,	4393, "Smolt 0+",	0.048893695,
+2016,	184165,	29044,	"Seapen 0+",	0.011012946,
+2016,	184166,	28626,	"Seapen 0+",	0.013881436,
+2016,	184167,	30238,	"Smolt 0+",	0.00817349,
+2016,	184168,	28922,	"Smolt 0+",	0.006823525,
+2017,	185767,	28979,	"Seapen 0+",	0.011607716,
+2017,	185768,	27324,	"Seapen 0+",	0.012670546,
+2017,	185769,	31557,	"Smolt 0+",	0.002034731,
+2017,	185770,	28216,	"Smolt 0+",	0.001786575,
+2018,	185779,	29680,	"Seapen 0+",	0.014877022,
+2018,	185780,	26753,	"Seapen 0+",	0.012624005,
+2018,	185781,	28326,	"Smolt 0+",	0.004970698,
+2018,	185782,	26733,	"Smolt 0+",	0.005236973)
+```
+
+```{r,message=FALSE}
+library(magrittr)
+data %<>% 
+  mutate(Returns = round(Tags * Survival_Rate))
+data
+
+effect <- rate_effect_bayesian(r = data$Returns, n = data$Tags)
+
+data <- bind_cols(data, effect)
+
+gp <- data %>%
+  ggplot() +
+  aes(x = Brood_Year, y = estimate) +
+  geom_pointrange(aes(ymin = lower, ymax = upper, color = Release_Stage, shape = Release_Stage), position = position_dodge(width = 0.25)) +
+  scale_x_continuous("Brood Year") +
+  scale_y_continuous("Survival (%)", labels = percent) +
+  NULL
+
+print(gp)
+```
