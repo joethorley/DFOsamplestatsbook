@@ -1,7 +1,3 @@
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
-
-This booklet was created using the **bookdown** package: https://pkgs.rstudio.com/bookdown
-
 <!-- badges: start -->
 ![bookdown](https://github.com/poissonconsulting/DFOsamplestatsbook/workflows/bookdown/badge.svg)
 <!-- badges: end -->
