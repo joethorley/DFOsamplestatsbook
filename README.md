@@ -28,3 +28,8 @@ To serve locally:
 ```r
 bookdown::serve_book()
 ```
+
+To build an epub book:
+```r
+bookdown::render_book("index.Rmd", "bookdown::epub_book")
+```
