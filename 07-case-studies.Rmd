@@ -33,7 +33,7 @@ print(gp)
 
 Based on visual examination of the plots it is clear that there are substantial differences among years.
 
-## Survival Rate
+## Smolt vs Seapen Survival Rate
 
 ```{r, echo = FALSE}
 data <- tribble(
@@ -78,6 +78,48 @@ gp <- data %>%
   geom_pointrange(aes(ymin = lower, ymax = upper, color = Release_Stage, shape = Release_Stage), position = position_dodge(width = 0.25)) +
   scale_x_continuous("Brood Year") +
   scale_y_continuous("Survival (%)", labels = percent) +
+  NULL
+
+print(gp)
+```
+
+## Chelis Tubs
+
+Three populations in separate tubs (T1, T2, T3) swam through plumbing and may have mixed between tubs.  
+It is unknown the direction that the fish moved and we only know that tub T2 has more fish than it did previously and T3 has less.  
+We want to find out if any of the tubs are single stock and the rough proportion of stocks in mixed tubs?
+
+I would simply plot how the uncertainty in the proportion of a population that is one stock varies with the sample size
+
+```{r}
+estimate <- rate_effect_bayesian(r = 0:100, n = 0:100)
+
+print(tail(estimate))
+
+gp <- estimate %>%
+  ggplot() +
+  aes(x = n, y = estimate) +
+  geom_line() +
+  geom_line(aes(y = lower), linetype = "dotted") +
+  geom_line(aes(y = upper), linetype = "dotted") +
+  scale_x_continuous("Sample Size") +
+  scale_y_continuous("Proportion (%)", labels = percent) +
+  NULL
+
+print(gp)
+```
+
+To make the relationship clearer I would plot it on the log odds scale.
+
+```{r}
+gp <- estimate %>%
+  ggplot() +
+  aes(x = n, y = estimate) +
+  geom_line() +
+  geom_line(aes(y = lower), linetype = "dotted") +
+  geom_line(aes(y = upper), linetype = "dotted") +
+  scale_x_continuous("Sample Size") +
+  scale_y_continuous("Proportion (%)", transform = "logit", labels = percent, breaks = c(0.01, 0.1,0.5,0.9, 0.99, 0.999, 0.9999)) +
   NULL
 
 print(gp)

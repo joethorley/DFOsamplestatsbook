@@ -73,6 +73,12 @@ set.seed(42)
 rate_effect_bayesian(132, 300, alpha = 1, beta = 1)
 ```
 
+And the same as if our prior knowledge about the sex ratio had the same information content as sampling 132 males out of 300 fish and we had yet to collect any data.
+```{r}
+set.seed(42)
+rate_effect_bayesian(NA_real_, 0, alpha = 133, beta = 169)
+```
+
 ### Suprisal
 
 Surprisal (in the Bayesian framework) is how surprising (in terms of tossing x heads in a row on a fair coin) it would be to discover the that true effect is in the opposite direction to the estimated effect [@rafi_semantic_2020].
