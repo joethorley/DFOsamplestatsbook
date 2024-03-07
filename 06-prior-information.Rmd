@@ -75,7 +75,7 @@ rate_effect_bayesian(132, 300, alpha = 1, beta = 1)
 
 ### Suprisal
 
-Surprisal (in the Bayesian framework) is how surprising (in terms of tossing x heads in a row on a fair coin) it would be to discover the that true effect is in the opposite direction to the estimated effect.
+Surprisal (in the Bayesian framework) is how surprising (in terms of tossing x heads in a row on a fair coin) it would be to discover the that true effect is in the opposite direction to the estimated effect [@rafi_semantic_2020].
 
 ```{r}
 -log(0.042, base = 2)
