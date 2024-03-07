@@ -33,3 +33,8 @@ To build an epub book:
 ```r
 bookdown::render_book("index.Rmd", "bookdown::epub_book")
 ```
+
+To build a pdf book:
+```r
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+```
