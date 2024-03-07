@@ -20,18 +20,20 @@ rate_effect(0, 5)
 
 ### Bayesian with Uninformative Prior
 
-If they were fit the equivalent Bayesian model then even with an uninformative prior they would still conclude that the sex ratio was significantly different from 50:50 but their estimate (if using the median value of the posterior probability) would be that approximately 10% of the run was female.
+If they were fit the equivalent Bayesian model then even with an uninformative prior (beta distribution with an alpha of 1 and a beta of 1) they would still conclude that the sex ratio was significantly different from 50:50 but their estimate (if using the median value of the posterior probability) would be that approximately 10% of the run was female.
 
 ```{r}
+plot_dbeta()
 set.seed(42)
 rate_effect_bayesian(0, 5)
 ```
 
 ### Bayesian with Weakly Informative Prior
 
-If they were to fit the Bayesian model with a weakly informative prior then they would estimate that about 40% of the run was female although they would consider in reasonably likely that females make up 60% of the run.
+If they were to fit the Bayesian model with a weakly informative prior say a beta distribution with alpha = 11 and beta = 11 then they would estimate that about 40% of the run was female although they would consider in reasonably likely that females make up 60% of the run.
 
 ```{r}
+plot_dbeta(11, 11)
 set.seed(42)
 rate_effect_bayesian(0, 5, alpha = 11, beta = 11)
 ```
