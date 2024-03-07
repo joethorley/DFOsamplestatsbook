@@ -8,6 +8,7 @@ Imports:
   ggplot2,
   knitr,
   magrittr,
+  mcmcr,
   rmarkdown,
   rjags,
   scales,
