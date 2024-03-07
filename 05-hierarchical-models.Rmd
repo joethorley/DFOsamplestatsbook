@@ -21,13 +21,13 @@ Expanding our ANOVA to include a random effect of group would produce the follow
 
 $$ \alpha_j \sim N(\bar\alpha, \sigma) $$
 
-$$ L_{i,j} \sim N(\alpha_j, \sigma) $$
+$$ L_{i,j} \sim N(\alpha_j, \sigma') $$
 
 where $\bar\alpha$ is the expected length for a typical group and $\sigma$ is the standard deviation of the among group variation.
 
 ## No Effects
 
-A third alternative is the no group effects (no pooling) model 
+A third alternative is the no group effects (complete pooling) model 
 
 $$ L_{i,j} \sim N(\alpha, \sigma') $$
 
