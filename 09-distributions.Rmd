@@ -1,0 +1,100 @@
+# Distributions
+
+A handful of probability distributions can be used to implement a surprising number of different models.
+
+## Continuous Distributions
+
+Continuous distributions describe the probability density for any given value within a particular range.
+
+### Uniform Distribution
+
+As its name suggests the [uniform distribution](https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)) has a constant density between a lower and upper bound. The uniform distribution can be useful for defining an uninformative prior.
+
+```{r, fig.cap = "A uniform distribution with a lower bound of 0 and an upper bound of 1."}
+data <- data.frame(x = seq(-0.1, 1.1, length.out = 1000))
+data$y <- dunif(data$x)
+gp <- ggplot(data, aes(x = x, y = y)) +
+  geom_line() +
+  expand_limits(y = 0) +
+  scale_y_continuous("Density")
+gp + scale_x_continuous(breaks = c(0, 0.5, 1))
+```
+
+### Normal Distributions
+
+Normal distributions are the most common type of distribution.
+
+#### Normal Distribution
+
+A [normal distribution](https://en.wikipedia.org/wiki/Normal_distribution) is a bell-shaped curve.
+
+```{r, fig.cap = "A (standard) normal distribution with a mean of 0 and a standard deviation of 1."}
+data <- data.frame(x = seq(-3, 3, length.out = 50))
+data$y <- dnorm(data$x)
+
+gp %+% data
+```
+
+#### Log-Normal Distribution
+
+The [log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) is a normal distribution on a logarithmic scale which means that all the possible values are positive. It is useful for modeling sizes or densities of organisms.
+
+```{r, fig.cap = "A log-normal distribution with a mean on the log scale of 0 and a standard deviation on the log scale of 1"}
+data <- data.frame(x = seq(0, 5, length.out = 100))
+data$y <- dlnorm(data$x)
+
+gp %+% data
+```
+
+### Beta Distribution
+
+The [beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) is a continous distribution on the probability scale which means that all the possible values are between 0 and 1.
+
+```{r, fig.cap = "A beta distribution with an alpha (shape1) parameter of 5 and a beta (shape2) parameter of 2."}
+data <- data.frame(x = seq(0, 1, length.out = 100))
+data$y <- dbeta(data$x, 5, 2)
+
+gp %+% data
+```
+
+## Discrete Distributions
+
+Discrete distributions describe the probability for each of the possible outcomes.
+
+#### Bernoulli Distribution
+
+The [Bernoulli distribution](https://en.wikipedia.org/wiki/Bernoulli_distribution) gives the probabilities for binary outcomes such tossing a coin or whether an individual survives.
+
+```{r, fig.cap="A Bernoulli distribution where the probability of outcome 1 is 0.7"}
+data <- data.frame(x = 0:1)
+data$y <- dbinom(data$x, 1, 0.7)
+
+gp <- ggplot(data, aes(x = x, y = y)) +
+  geom_col() +
+  expand_limits(y = 0) +
+  scale_y_continuous("Probability")
+
+gp + scale_x_continuous(breaks = 0:10)
+```
+
+### Binomial Distribution
+
+The [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) is an generalization of the Bernoulli distribution to multiple trials such the number of heads when tossing five coins or the number of marked fish that are resighted.
+It is useful for modeling survival or mark-recapture data.
+
+```{r, fig.cap="A binomial distribution for five trials with a probability of success of 0.7."}
+data <- data.frame(x = 0:5)
+data$y <- dbinom(data$x, 5, 0.7)
+gp %+% data + scale_x_continuous(breaks = 0:5)
+```
+
+### Poisson Distribution
+
+The [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution) gives the probabilities for a number of independent events such as observing an individual during a survey.
+It is useful for analysing count data.
+
+```{r, fig.cap="A Poisson distribution where the mean number of events is 3."}
+data <- data.frame(x = 0:10)
+data$y <- dpois(data$x, 3)
+gp %+% data + scale_x_continuous(breaks = 0:10)
+```
