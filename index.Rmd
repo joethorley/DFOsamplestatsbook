@@ -30,7 +30,7 @@ This booklet is available at
 
 <https://poisson-dfosamplestatsbook.netlify.app>
 
-password *salmonids*.
+password: *salmonids*.
 
 There is a currently private R data package associated with the book which is available at
 
@@ -40,7 +40,9 @@ and a currently private R package of simple analytic functions at
 
 <https://github.com/poissonconsulting/DFOsamplestats>
 
-although the website describing the functions is available at <https://poissonconsulting.github.io/DFOsamplestats/>.
+with the website describing the functions available at
+
+<https://poissonconsulting.github.io/DFOsamplestats/>.
 
 Following the course, a hosting fee will be charged after six months unless the book and the R packages are transferred to the [DFO github](https://github.com/dfo-mpo) site.
 
