@@ -5,6 +5,7 @@
 R is open source statistical software that can be downloaded from [CRAN](https://cran.r-project.org/).
 
 Once R has been installed the two R packages associated with this course can be installed by running the following code in the R console.
+
 ```{r, eval=FALSE}
 install.packages("pak")
 pak::pak("poissonconsulting/DFOsalmonids")
@@ -17,6 +18,10 @@ The packages can then be loaded using
 library(DFOsalmonids)
 library(DFOsamplestats)
 ```
+
+If you use the Windows operating system, you will need to install Rtools if you have not done so already. Rtools can be downloaded from the [official CRAN website](https://cran.r-project.org/bin/windows/Rtools/). This utility is needed for installing packages which are not compiled (bundled together like a ZIP file). Mac and Linux systems have similar functionality already built in.
+
+If your IT department or system administrators prevent you from installing software or packages, you can alternatively sign up and use a free account at [Posit Cloud](https://posit.cloud)(the creators of Rstudio). This allows you to use R and R studio through a web application to complete the course materials.
 
 ## Data Package
 
@@ -60,7 +65,7 @@ The p-value for the first group is for $p_1 = 0.5$ while the p-value for subsequ
 
 ### Power
 
-And the [`rate_sim()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_sim.html) simulate data.
+Use [`rate_sim()`](https://poissonconsulting.github.io/DFOsamplestats/reference/rate_sim.html) to simulate data.
 
 ```{r}
 set.seed(99)
