@@ -122,14 +122,17 @@ This model is still geocentric in that it doesn't allow us to predict the effect
 
 ## Chehalis Tubs
 
-Three populations in separate tubs (T1, T2, T3) swam through plumbing and may have mixed between tubs.  
-It is unknown the direction that the fish moved and we only know that tub T2 has more fish than it did previously and T3 has less.  
-We want to find out if any of the tubs are single stock and the rough proportion of stocks in mixed tubs?
+Three populations in separate tubs (T1, T2, T3) swam through plumbing and may have mixed between tubs. 
 
-Assumptions 
-  - Movement between tubs has stopped 
-	- Fish are randomly selected from tubs for sampling
-	- Fish are not sampled twice 
+It is unknown the direction that the fish moved and we only know that tub T2 has more fish than it did previously and T3 has less.  
+
+We want to find out if any of the tubs are single stock and the rough proportion of stocks in mixed tubs.
+
+Assumptions:
+
+* Movement between tubs has stopped 
+* Fish are randomly selected from tubs for sampling
+* Fish are not sampled twice 
 
 Based on this very limited information I would plot how the uncertainty in the proportion of a population that is one stock varies with the sample size with uninformative priors.
 
@@ -185,6 +188,7 @@ gp <- data %>%
 
 print(gp)
 ```
+
 I would likely use the log transform to better understand how the sample size requirement varies.
 
 ```{r}
