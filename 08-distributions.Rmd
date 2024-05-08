@@ -58,7 +58,7 @@ gp %+% data
 ```
 
 Beta distributions are fully described by the $\alpha$ and $\beta$ parameters.
-The mean is $\frac{\alpha}{\alpha + \beta}$ while the uncertainty in the probability that the beta distribution represents is identical to the information that would be provided by $(\alpha - 1) + (\beta - 1)$ trials with ($\beta - 1$) successful (1 vs 0) outcomes.
+The mean is $\frac{\alpha}{\alpha + \beta}$ while the information is equivalent that which would be provided by $(\alpha - 1) + (\beta - 1)$ trials with ($\beta - 1$) successful (1 vs 0) outcomes.
 
 ## Discrete Distributions
 

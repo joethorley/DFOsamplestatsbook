@@ -61,7 +61,7 @@ set.seed(42)
 rate_effect_bayesian(0, 5, alpha = 101, beta = 101)
 ```
 
-Indeed given this much prior information then they would require 68 or more males from a sample size of 100 fish to obtain a statistically significant result.
+Indeed given this much prior information then they would require 68 or more males (arrived at by trial and error) from a sample size of 100 fish to obtain a statistically significant result.
 
 ```{r}
 set.seed(42)
